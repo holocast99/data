@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofis Görev Yönetim Sistemi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=cL7kegVNaQA4X4by-hRLeeqUWrb_vr4xPhfkO8RCMHWO_vDqEzw6bI6RNJ4kW9F3qOu-engRRg-eyTAHWolagcCFRPF6phtjrqGz7a1i8-Dfq0Tsb0bQy73qSGx5BTaGygCM1OFjZc9lahnkmHAod7Tm7vRWAY3AzIsNrrA4BiR4Iz9Sv6EtEyiwtiuPLD9O22UjQ5R7hBevYfh1zUf_Yme7y40_tdxDtXA1rJJI6heUC6KTMeRGrCxsTXUNO2HeASebK6SzFYdhdHoTW0plKnb_U-Q3osd3UhwtqqlQd-cwXGvZecv3dRzZ2x0EQBlrE_OtnEZchw8snHOv933CTwwswzqFQsQjGQo42TrJba4qB-ZIWlRyu7p93-6ZkLDW2K8jbMgZP16Xe5smBjTuFIf5BlNzOjyj_ialZy1DE-va5fj9mHCG8Uv_6kJuc_sCuHc5dDMu3syiucAh_4wqYcBaVsEdTTXvvePeBP4SVJRbJIIkzvVvljOdWUKfrFKYHW4HDVASnvU1j8qhAq-7z6PSALbmL-8m-Qe9PfywqnR_lEfNmf_fPBbD9MarFIGi-acOOYvj6xPQDYOU3aqWsdxCP27E6sSWUFWSkERcU5SKmgQCxt3F1loVLwtd9AJyL8z24UGLqO468InM_KXu_giBE5yl_J2BJaxz0W3VO6uwC9v5U_ckwP3F8r8cX2ZM" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9kNDFjaHNzbnBxZG5lLmNsb3VkZnJvbnQubmV0L3VzZXJfdXBsb2FkX2J5X21vZHVsZS9jaGF0X2JvdC9maWxlcy82MTg4MDUwNy9GcGJ5ellUeTRGbVdxZ3RhLmh0bWw_RXhwaXJlcz0xNzQwNjM2MDc0JlNpZ25hdHVyZT1QTG5Kd3FHSHhBUUNSWHZlQ1pXSG5CTHV5NTZBYURrNkl2Y2lNb1A5dDhGUUhNTzJmenRRNzduVnZkMzE0cEt0M3BZY1hhSGV4blFFSmpxNmpSY2dRSnFITENyZXNEcnZWN3VrMEVYcFVVakZJM2R0SG5CMy05eURXZVp3VnVFdTg1S3pmSWlIQUFJbW9tUGtJY1dyRlVvcloyOUtPanhocHd2Vm1nOExGclRyUGgwMERoUkoyVXQ1RHRuRkQ1T2pUZ2s2VVFUV2E4dkVIcWNSM2gwUjJ0OGg4cGZ-T2pkcDFOSmo5OURrM3ZRUnk2TWkwMWZqckRoVUtIbmdSUmJuSVE1SmgtelpNRXZuUFhqbE5ob2pxTndjVktBMzBVNldzTS1qLVVab3RjM1daMnJpUTZtWS16TGFEZGpxb1d2LS1zc25EejMtVVZSYmpzb0JidUhicHdfXyZLZXktUGFpci1JZD1LM1VTR1pJS1dNRENTWA"/><style>
+        /* Genel Ayarlar */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eef2f5;
+            font-size: 14px;
+            color: #333;
+ padding-top: 80px; /* Başlık yüksekliği kadar boşluk bırakır */
+        }
+ header {
+    position: fixed; /* Bu, başlığı sabitler */
+    top: 0; /* Sayfanın en üstünde olmasını sağlar */
+    left: 0; /* Sol kenardan başlamasını sağlar */
+    right: 0; /* Sağ kenara kadar uzanmasını sağlar */
+    background-color: #34495e; /* Arka plan rengi */
+    color: #ffffff; /* Yazı rengi */
+    padding: 20px; /* İçerik boşluğu */
+    text-align: center; /* Ortaya hizalar */
+    z-index: 1000; /* Diğer içeriklerin üstünde görünmesini sağlar */
+}
+
+        h1 {
+            margin: 0;
+            font-size: 2em;
+            letter-spacing: 1px;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 25px;
+            background: #ffffff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Form Bölümleri */
+        .form-section {
+            margin-bottom: 40px;
+        }
+        .form-section h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        input[type="text"], input[type="password"], input[type="email"], select {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+            font-size: 14px;
+        }
+        input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+            outline: none;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Filtre ve Konu Seçim Kutuları */
+        .filter-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dcdfe6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        .filter-container select, .filter-container input {
+            flex: 1;
+            min-width: 150px;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+            font-size: 14px;
+        }
+        .filter-container select:focus, .filter-container input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52,152,219,0.5);
+        }
+        label {
+            font-weight: 500;
+            margin-right: 10px;
+            color: #2c3e50;
+        }
+        .assigned-select, .status-select, .project-select {
+            width: 100%;
+            max-width: 250px;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        .assigned-select:focus, .status-select:focus, .project-select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52,152,219,0.5);
+        }
+
+        /* Görev Listesi ve Tablolar */
+        .task-list h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+            font-size: 14px;
+        }
+        th {
+            background-color: #f1f3f5;
+            font-weight: 600;
+            color: #34495e;
+        }
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #95a5a6;
+        }
+        .drag-icon {
+            cursor: move;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .group-header {
+            display: flex;
+            align-items: center;
+            margin-top: 30px;
+            font-weight: 600;
+            padding: 12px;
+            background-color: #f1f3f5;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+
+        /* Butonlar İçin Özelleştirmeler */
+        td button {
+            padding: 5px 8px; /* Buton padding'i yarıya indirildi */
+            margin-right: 5px;
+            font-size: 12px; /* Font boyutu küçültüldü */
+            height: 25px; /* Yükseklik ayarlandı */
+            display: inline-block; /* Yan yana dizilmesi için inline-block ayarı */
+        }
+        td button:last-child {
+            margin-right: 0;
+        }
+
+        /* Bildirimler */
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Ortada görünmesini sağlar */
+            background-color: #2ecc71;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+            z-index: 1000;
+            text-align: center;
+            min-width: 250px;
+        }
+        .notification.error {
+            background-color: #e74c3c;
+        }
+        .notification.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #34495e;
+            color: #bdc3c7;
+            border-top: 1px solid #2c3e50;
+        }
+
+        /* Responsive Tasarım */
+        @media (max-width: 992px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+            .filter-container, .task-list, .form-section {
+                margin-bottom: 30px;
+            }
+            .group-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            table, th, td {
+                font-size: 13px;
+            }
+        }
+        @media (max-width: 576px) {
+            .filter-container {
+                flex-direction: column;
+            }
+            .filter-container select, .filter-container input {
+                width: 100%;
+            }
+            button {
+                width: 100%;
+                padding: 12px 0;
+            }
+            .notification {
+                min-width: 200px;
+                padding: 12px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ofis Görev Yönetim Sistemi</h1>
+    </header>
+    <div class="container">
+        <!-- Kullanıcı Kaydı -->
+        <div class="form-section">
+            <h2>Kullanıcı Kaydı</h2>
+            <form id="registerForm">
+                <input type="text" id="newUsername" placeholder="Kullanıcı Adı" required>
+                <input type="password" id="newPassword" placeholder="Şifre" required>
+                <button type="submit">Kaydet</button>
+            </form>
+        </div>
+
+        <!-- Kullanıcı Girişi -->
+        <div class="form-section">
+            <h2>Kullanıcı Girişi</h2>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+                <input type="password" id="password" placeholder="Şifre" required>
+                <button type="submit">Giriş Yap</button>
+            </form>
+        </div>
+
+        <!-- Görev Listesi -->
+        <div class="task-list" id="taskSection" style="display: none;">
+            <h2>Görev Listesi</h2>
+            
+            <!-- Görev Ekleme Formu -->
+            <div class="form-section">
+                <!-- Grup Adı Açılır Listeye Çevrildi -->
+                <select id="newGroup" required>
+                    <option value="" disabled selected>Grup Adı Seçiniz</option>
+                    <option>Hakediş</option>
+                    <option>İş Programı</option>
+                    <option>İş Deneyim</option>
+                    <option>Mukayese</option>
+                    <option>Yazışma</option>
+                    <option>Notlar</option>
+                </select>
+                <!-- Proje Ekleme Alanı Eklendi -->
+                <input type="text" id="newProject" placeholder="Proje" required>
+                <!-- Görev Sütunu Silindi -->
+                <input type="text" id="newTopic" placeholder="Konu" required>
+                <input type="text" id="newDescription" placeholder="Açıklama" required>
+                <input type="text" id="assignedUser" placeholder="Atanan Kullanıcı" disabled>
+                <button type="button" onclick="addTask()">Ekle</button>
+            </div>
+            
+            <!-- Filtreleme Kutucukları: Tüm Filtreler Tek Satırda Yan Yana -->
+            <div class="filter-container">
+                <label for="filterTopic">Konu:</label>
+                <!-- "Tüm Konular" Filtreyi Select'ten Input'a Çevirildi -->
+                <input type="text" id="filterTopic" class="topic-input" placeholder="Konu ile filtrele" onkeyup="filterTasks()">
+                
+                <select id="filterProject" class="project-select" onchange="filterTasks()">
+                    <option value="">Tüm Projeler</option>
+                    <!-- Dinamik olarak doldurulacak -->
+                </select>
+
+                <select id="filterAssigned" class="assigned-select" onchange="filterTasks()">
+                    <option value="">Tüm Atananlar</option>
+                    <!-- Dinamik olarak doldurulacak -->
+                </select>
+
+                <select id="filterStatus" class="status-select" onchange="filterTasks()">
+                    <option value="">Tüm Durumlar</option>
+                    <option value="Tamamlandı">Tamamlandı</option>
+                    <option value="Devam Ediyor">Devam Ediyor</option>
+                </select>
+
+                <input type="text" id="filterDescription" placeholder="Açıklama" onkeyup="filterTasks()">
+                <input type="text" id="filterDate" placeholder="Tarih" onkeyup="filterTasks()">
+            </div>
+
+            <!-- Görev Grupları ve Tablolar -->
+            <div id="taskGroups"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Ofis Görev Yönetim Sistemi. Tüm hakları saklıdır.</p>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script>
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        let currentUser = '';
+        let editingIndex = -1;
+
+        // Konu renklerini saklayacak nesne
+        let topicColors = {};
+
+        function updateFilterOptions() {
+            updateFilterSelect('filterProject', 'project');
+            updateFilterSelect('filterAssigned', 'assignedTo');
+        }
+
+        function updateFilterSelect(selectId, key) {
+            const select = document.getElementById(selectId);
+            const uniqueValues = [...new Set(tasks.map(task => task[key]))].filter(Boolean);
+
+            // Mevcut seçili değeri koru
+            const currentSelection = select.value;
+
+            // Listeyi temizle ve varsayılan seçeneği ekle
+            select.innerHTML = '';
+            if (selectId === 'filterStatus') {
+                select.innerHTML = `
+                    <option value="">Tüm Durumlar</option>
+                    <option value="Tamamlandı">Tamamlandı</option>
+                    <option value="Devam Ediyor">Devam Ediyor</option>
+                `;
+                return;
+            }
+            const defaultOption = selectId === 'filterProject' ? '<option value="">Tüm Projeler</option>' :
+                                  '<option value="">Tüm Atananlar</option>';
+            select.innerHTML = defaultOption;
+
+            // Her benzersiz değer için yeni bir seçenek ekle
+            uniqueValues.forEach(value => {
+                const option = document.createElement('option');
+                option.value = value;
+                option.textContent = value;
+                select.appendChild(option);
+            });
+
+            // Önceki seçimi geri yükle
+            if (currentSelection) {
+                select.value = currentSelection;
+            }
+        }
+
+        function filterTasks() {
+            renderTasks();
+        }
+
+        function getTopicColor(topic) {
+            if (!topicColors[topic]) {
+                topicColors[topic] = '#' + Math.floor(Math.random()*16777215).toString(16);
+            }
+            return topicColors[topic];
+        }
+
+        function renderTasks() {
+            const taskContainer = document.getElementById('taskGroups');
+            taskContainer.innerHTML = '';
+
+            const filterTopicInput = document.getElementById('filterTopic').value.toLowerCase();
+            const selectedProject = document.getElementById('filterProject').value;
+            const selectedAssigned = document.getElementById('filterAssigned').value;
+            const selectedStatus = document.getElementById('filterStatus').value;
+            const filterDescription = document.getElementById('filterDescription').value.toLowerCase();
+            const filterDate = document.getElementById('filterDate').value.toLowerCase();
+
+            let filteredTasks = tasks.filter(task => {
+                return (
+                    (!filterTopicInput || task.topic.toLowerCase().includes(filterTopicInput)) &&
+                    (!selectedProject || task.project === selectedProject) &&
+                    (!selectedAssigned || task.assignedTo === selectedAssigned) &&
+                    (!selectedStatus || (selectedStatus === 'Tamamlandı' ? task.completed : !task.completed)) &&
+                    (!filterDescription || task.description.toLowerCase().includes(filterDescription)) &&
+                    (!filterDate || task.timestamp.toLowerCase().includes(filterDate))
+                );
+            });
+
+            const groups = {};
+            filteredTasks.forEach(task => {
+                if (!groups[task.group]) {
+                    groups[task.group] = [];
+                }
+                groups[task.group].push(task);
+            });
+
+            Object.keys(groups).forEach(groupName => {
+                const groupTasks = groups[groupName];
+                const groupHeader = document.createElement('div');
+                groupHeader.className = 'group-header';
+                
+                const color = getTopicColor(groupTasks[0].topic);
+                groupHeader.innerHTML = `
+                    <div class="drag-icon" style="background-color: ${color};"></div>
+                    ${groupName}
+                `;
+                taskContainer.appendChild(groupHeader);
+
+                const table = document.createElement('table');
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th style="width:2%;"> </th>
+                            <th style="width:15%;">Konu</th>
+                            <th style="width:10%;">Proje</th>
+                            <th style="width:30%;">Açıklama</th>
+                            <th style="width:8%;">Atanan</th>
+                            <th style="width:10%;">Durum</th>
+                            <th style="width:8%;">Tarih/Saat</th>
+                            <th style="width:17%;">İşlemler</th>
+                        </tr>
+                    </thead>
+                `;
+
+                const tbody = document.createElement('tbody');
+                groupTasks.forEach((task, index) => {
+                    const taskIndex = tasks.indexOf(task);
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><div class="drag-icon" style="background-color: ${getTopicColor(task.topic)};"></div></td>
+                        <td>${task.topic}</td>
+                        <td>${task.project}</td>
+                        <td contenteditable="true" onblur="updateDescription(${taskIndex}, this.innerText)">${task.description}</td>
+                        <td>${task.assignedTo}</td>
+                        <td>${task.completed ? 'Tamamlandı' : 'Devam Ediyor'}</td>
+                        <td style="font-size: 0.8em;">${task.timestamp}</td>
+ <td>
+    <div style="display: flex; justify-content: space-between;">
+        <button onclick="toggleTask(${taskIndex})">${task.completed ? 'Geri Al' : 'Tamamla'}</button>
+        <button onclick="editTask(${taskIndex})">Düzenle</button>
+        <button onclick="deleteTask(${taskIndex})">Sil</button>
+    </div>
+</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                table.appendChild(tbody);
+                taskContainer.appendChild(table);
+            });
+        }
+
+        // Görev Ekleme Fonksiyonu
+        function addTask() {
+            const groupInput = document.getElementById('newGroup');
+            const projectInput = document.getElementById('newProject'); // Proje girişi
+            const topicInput = document.getElementById('newTopic');
+            const descriptionInput = document.getElementById('newDescription');
+            const assignedUserInput = document.getElementById('assignedUser');
+
+            if (groupInput.value && projectInput.value && topicInput.value && descriptionInput.value) {
+                const timestamp = new Date().toLocaleString();
+                const groupName = groupInput.value.trim();
+                
+                tasks.push({ 
+                    group: groupName,
+                    project: projectInput.value.trim(), // Proje verisi ekleniyor
+                    topic: topicInput.value.trim(),
+                    description: descriptionInput.value.trim(),
+                    assignedTo: (currentUser === 'admin' ? assignedUserInput.value.trim() : currentUser), 
+                    completed: false, 
+                    timestamp: timestamp
+                });
+
+                groupInput.value = '';
+                projectInput.value = ''; // Proje alanı temizlendi
+                topicInput.value = '';
+                descriptionInput.value = '';
+                assignedUserInput.value = '';
+                saveData();
+                updateFilterOptions();
+                renderTasks();
+                showNotification('Görev başarıyla eklendi!');
+            } else {
+                showNotification('Lütfen tüm alanları doldurun!', true);
+            }
+        }
+
+        // Yardımcı Fonksiyonlar
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.className = 'notification show' + (isError ? ' error' : '');
+            setTimeout(() => {
+                notification.className = 'notification';
+            }, 3000);
+        }
+
+        function saveData() {
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function toggleTask(index) {
+            tasks[index].completed = !tasks[index].completed;
+            tasks[index].timestamp = new Date().toLocaleString();
+            saveData();
+            renderTasks();
+            showNotification(`Görev ${tasks[index].completed ? 'tamamlandı' : 'geri alındı'}.`);
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            saveData();
+            updateFilterOptions();
+            renderTasks();
+            showNotification('Görev silindi!');
+        }
+
+        function editTask(index) {
+            const task = tasks[index];
+            document.getElementById('newGroup').value = task.group;
+            document.getElementById('newProject').value = task.project; // Proje alanı dolduruldu
+            document.getElementById('newTopic').value = task.topic;
+            document.getElementById('newDescription').value = task.description;
+            document.getElementById('assignedUser').value = task.assignedTo;
+            editingIndex = index;
+            showNotification('Görev düzenleme modunda. Değişiklikleri kaydetmek için "Ekle" butonuna basın.');
+        }
+
+        function updateDescription(index, newDescription) {
+            tasks[index].description = newDescription;
+            tasks[index].timestamp = new Date().toLocaleString();
+            saveData();
+            showNotification('Açıklama güncellendi!');
+        }
+
+        // Form Olay Dinleyicileri
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const newUsername = document.getElementById('newUsername').value.trim();
+            const newPassword = document.getElementById('newPassword').value.trim();
+
+            if (users.find(user => user.username === newUsername)) {
+                showNotification('Bu kullanıcı adı zaten mevcut!', true);
+            } else {
+                users.push({ username: newUsername, password: newPassword });
+                saveData();
+                showNotification('Kayıt başarılı!');
+                document.getElementById('registerForm').reset();
+                updateFilterOptions();
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (username === 'admin' && password === '0') {
+                currentUser = 'admin';
+                showNotification('Yönetici girişi başarılı!');
+                document.getElementById('loginForm').reset();
+                document.getElementById('assignedUser').disabled = false;
+                document.getElementById('taskSection').style.display = 'block';
+            } else {
+                const user = users.find(user => user.username === username && user.password === password);
+                if (user) {
+                    currentUser = username;
+                    showNotification('Giriş başarılı!');
+                    document.getElementById('loginForm').reset();
+                    document.getElementById('taskSection').style.display = 'block';
+                    document.getElementById('assignedUser').disabled = true;
+                } else {
+                    showNotification('Kullanıcı adı veya şifre yanlış!', true);
+                }
+            }
+            updateFilterOptions();
+            renderTasks();
+        });
+
+        // Sayfa Yüklendiğinde Filtreleri ve Görevleri Güncelle
+        window.onload = function() {
+            updateFilterOptions();
+            renderTasks();
+        };
+    </script>
+</body>
+</html>
