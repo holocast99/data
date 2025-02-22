@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Programı</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* (CSS stilleri - Önceki mesajdakiyle aynı, değişiklik yok) */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.freeimages.com/images/large-previews/209/tranquil-watercolor-blend-0410-5697740.jpg') no-repeat center center fixed; /* Arka plan resmi */
+            background-size: cover; /* Resmi kaplayacak şekilde ayarla */
+            font-size: 12px;
+            color: #333;
+            padding-top: 20px;
+        }
+        header {
+            text-align: center;
+            background-color: rgba(106, 176, 76, 0.4); /* Arka plan rengini saydam yap */
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        header h1 {
+            font-size: 2em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.6); /* İçerik alanı için saydam beyaz arka plan */
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+        .form-section {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"], input[type="date"], textarea {
+            flex: 1;
+            padding: 8px;
+            margin: 0;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        select {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 8px 12px;
+            background-color: #58b776;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+            font-size: 12px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Başlangıç gölgesi */
+            transition: all 0.1s ease; /* Yumuşak geçişler için */
+        }
+        button:hover {
+            background-color: #4cae4f;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Hover'da gölge biraz değişir */
+        }
+        /* .action-buttons içindeki butonlara özel stil */
+        .action-buttons button {
+            padding: 4px 8px;  /* Daha da küçültülmüş padding */
+            font-size: 10px;   /* Daha da küçültülmüş font size */
+            margin: 0 1px;     /* Daha da küçültülmüş margin */
+        }
+        button:active {
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4); /* İç gölge + üst kenar parlaklığı */
+            transform: translateY(2px); /* Daha belirgin aşağı kaydırma */
+            background-color: #3f7b3f; /* Daha koyu bir arka plan rengi */
+            border-bottom: 1px solid #333; /* İsteğe bağlı: Kenarlığı da değiştirebilirsin */
+        }
+        .action-width {
+            width: 85px; /* Bunu biraz daha daraltabiliriz, butonlar küçüldüğü için */
+        }
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .search-container input {
+            flex: 1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            font-size: 12px;
+            border: 1px solid #bdc3c7;
+        }
+        th {
+            background-color: #d4edda;
+        }
+        .group-header {
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            position: sticky; /* Başlıkların yapışkan olması için */
+            top: 0; /* Sayfanın üst kısmına yapışmasını sağlar */
+            z-index: 100; /* Diğer içeriklerin üstünde görünmesi için */
+        }
+        .completed-note {
+            color: gray;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Not Programı</h1>
+    </header>
+    <div class="container">
+        <div class="form-section">
+            <div class="input-group">
+                <select id="groupName">
+                    <option value="" disabled selected>Grup Seçin</option>
+                    <option value="İş Deneyim Belgesi">İş Deneyim Belgesi</option>
+                    <option value="Hakediş">Hakediş</option>
+                    <option value="Mukayese">Mukayese</option>
+                    <option value="Genel">Genel</option>
+                    <option value="Yazışma">Yazışma</option>
+                    <option value="Rapor">Rapor</option>
+                    <option value="İş Programı">İş Programı</option>
+                </select>
+                <select id="responsible">
+                    <option value="" disabled selected>Sorumlu Seçin</option>
+                    <option value="Cihat">Cihat</option>
+                    <option value="Gül">Gül</option>
+                    <option value="Mahmud">Mahmud</option>
+                    <option value="Perihan">Perihan</option>
+                    <option value="Yaren">Yaren</option>
+                </select>
+                <input type="text" id="projectName" placeholder="Proje Adı">
+                <input type="text" id="topic" placeholder="Konu">
+                <input type="date" id="date">
+            </div>
+            <textarea id="description" placeholder="Açıklama" required></textarea>
+            <button onclick="addNote()">Ekle</button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Notları ara..." onkeyup="searchNotes()">
+            <button onclick="exportNotes()">Notları Yedekle</button>
+            <input type="file" onchange="importNotes(event)" />
+            <button onclick="toggleView()">Görünümü Değiştir</button> <!-- Yeni buton -->
+        </div>
+        <div id="notesContainer">
+            <!-- Not grupları buraya eklenecek -->
+        </div>
+        <div class="tooltip" id="tooltip"></div>
+    </div>
+
+    <footer style="text-align: center; padding: 10px; background-color: rgba(106, 176, 76, 0.4); color: white; border-radius: 5px; margin-top: 20px;font-style: italic;">
+        Made by GG ® v.1
+    </footer>
+
+    <script>
+        // Tüm tarihleri ISO 8601 (YYYY-MM-DD) formatında gönder
+date: document.getElementById('date').value || new Date().toISOString().split('T')[0]
+
+        let notes = []; // Global değişken olarak tanımla
+        let groupByProject = false; // Görünüm durumu için değişken.  Başlangıçta "Grup" bazında.
+        const API_URL = 'api_v2.php';
+
+        async function fetchNotes() {
+            try {
+                const response = await fetch('api_v2.php?action=getNotes');
+                notes = await response.json(); // Burada notes'a atama yap
+                return notes;
+            } catch (error) {
+                console.error('Hata:', error);
+            }
+        }
+
+        async function postData(action, data) {
+            try {
+                const response = await fetch('api_v2.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action, ...data })
+                });
+                return await response.json();
+            } catch (error) {
+                console.error('Hata:', error);
+            }
+        }
+
+        async function addNote() {
+    const noteData = {
+        groupName: document.getElementById('groupName').value,
+        responsible: document.getElementById('responsible').value,
+        projectName: document.getElementById('projectName').value,
+        topic: document.getElementById('topic').value,
+        description: document.getElementById('description').value,
+        date: document.getElementById('date').value || new Date().toISOString().split('T')[0] // YYYY-MM-DD formatı
+    };
+
+    try {
+        const response = await fetch('api_v2.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'addNote', ...noteData })
+        });
+        // Hata kontrolü ve render...
+    } catch (error) {
+        console.error('Ekleme hatası:', error);
+        showTooltip(`Hata: ${error.message}`);
+    }
+}
+
+
+
+        function toggleView() {
+            groupByProject = !groupByProject; // Durumu tersine çevir
+            renderNotes(); // Notları yeniden çiz
+        }
+
+        async function renderNotes() {
+            try {
+                await fetchNotes(); // Notları çek
+                const notesContainer = document.getElementById('notesContainer');
+                notesContainer.innerHTML = '';
+
+                const groupedNotes = notes.reduce((acc, note) => {
+                    const groupKey = note.completed ? 'Tamamlananlar' : (groupByProject ? note.projectName : note.groupName);
+                    if (!acc[groupKey]) acc[groupKey] = [];
+                    acc[groupKey].push(note);
+                    return acc;
+                }, {});
+
+                // Notları render etme kodu burada devam eder...
+                const groupOrder = Object.keys(groupedNotes).sort((a, b) => {
+                    if (a === 'Tamamlananlar') return 1;
+                    if (b === 'Tamamlananlar') return -1;
+                    return 0;
+                });
+
+                for (const group of groupOrder) {
+                    const headerColor = groupByProject ? '#2980b9' : '';
+                    notesContainer.innerHTML += `<div class="group-header" data-group="${group}" style="background-color: ${headerColor}">${group}</div>`;
+                    const groupNotes = groupedNotes[group];
+
+                    // Tablo başlangıcı
+                    notesContainer.innerHTML += `
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="fixed-width-project">Proje Adı</th>
+                                    <th class="fixed-width-subject">Konu</th>
+                                    <th>Açıklama</th>
+                                    <th class="fixed-width">Sorumlu</th>
+                                    <th class="fixed-width">Tarih</th>
+                                    <th class="fixed-width">Değişiklik</th>
+                                    <th class="action-width">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${groupNotes.map(note => `
+                                    <tr class="${note.completed ? 'completed-note' : ''}">
+                                        <td onclick="copyToInputFields(${JSON.stringify(note)})">${note.projectName}</td>
+                                        <td>${note.topic}</td>
+                                        <td>
+                                            <div contenteditable="${!note.completed}" class="editable ${note.completed ? 'completed-note' : ''}" onblur="saveDescription(${note.id}, this)">${note.description}</div>
+                                        </td>
+                                        <td>${note.responsible}</td>
+                                        <td>${note.date}</td>
+                                        <td>${note.changeDate || '-'}</td>
+                                        <td class="action-buttons" style="border: none;">
+                                            ${note.completed ? `<button onclick="revertNote(${note.id})">Geri Al</button>
+                                            <button onclick="deleteNote(${note.id})">Sil</button>` :
+                                            `<button onclick="editNote(${note.id})">Düzenle</button>
+                                             <button onclick="deleteNote(${note.id})">Sil</button>
+                                             <button onclick="completeNote(${note.id})">Tamamla</button>`}
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `; // Tablo sonu
+                }
+            } catch (error) {
+                console.error('Render hatası:', error);
+            }
+        }
+
+        function copyToInputFields(note) {
+            document.getElementById('groupName').value = note.groupName;
+            document.getElementById('responsible').value = note.responsible;
+            document.getElementById('projectName').value = note.projectName;
+            document.getElementById('topic').value = note.topic;
+            document.getElementById('description').value = note.description;
+            document.getElementById('date').value = note.date; // Tarih formatı önemli
+            showTooltip("Bilgiler kopyalandı!");
+        }
+
+        function clearInputs() {
+            document.getElementById('groupName').selectedIndex = 0;
+            document.getElementById('responsible').selectedIndex = 0;
+            document.getElementById('projectName').value = '';
+            document.getElementById('topic').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('date').value = '';
+        }
+
+      // Örnek silme fonksiyonu
+async function deleteNote(id) {
+    await fetch(`api_v2.php?action=deleteNote&id=${id}`, { 
+        method: 'DELETE' 
+    });
+    await renderNotes();
+}
+
+
+        async function completeNote(id) {
+            try {
+                const result = await postData('updateNote', {
+                    id,
+                    completed: 1,
+                    changeDate: new Date().toISOString()
+                });
+                if (result.success) await renderNotes();
+            } catch (error) {
+                console.error('Tamamlama hatası:', error);
+            }
+        }
+
+        function showTooltip(message) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.innerText = message;
+            tooltip.style.display = 'block';
+            setTimeout(() => {
+                tooltip.style.display = 'none';
+            }, 2000);
+        }
+
+        function searchNotes() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const filteredNotes = notes.filter(note => {
+                return note.projectName.toLowerCase().includes(searchValue) ||
+                       note.topic.toLowerCase().includes(searchValue) ||
+                       note.description.toLowerCase().includes(searchValue) ||
+                       note.groupName.toLowerCase().includes(searchValue) ||
+                       note.responsible.toLowerCase().includes(searchValue);
+            });
+            renderFilteredNotes(filteredNotes);
+        }
+
+        function renderFilteredNotes(filteredNotes) {
+            const notesContainer = document.getElementById('notesContainer');
+            notesContainer.innerHTML = '';
+
+            const groupedNotes = filteredNotes.reduce((acc, note) => {
+                const groupKey = note.completed ? 'Tamamlananlar' : note.groupName;
+                if (!acc[groupKey]) {
+                    acc[groupKey] = [];
+                }
+                acc[groupKey].push(note);
+                return acc;
+            }, {});
+
+            // Önce tamamlanmamış grupları, sonra "Tamamlananlar" grubunu çiz
+            const groupOrder = Object.keys(groupedNotes).sort((a, b) => {
+                if (a === 'Tamamlananlar') return 1;
+                if (b === 'Tamamlananlar') return -1;
+                return 0;
+            });
+
+            for (const group of groupOrder) {
+                notesContainer.innerHTML += `<div class="group-header" data-group="${group}">${group}</div>`;
+                const groupNotes = groupedNotes[group];
+                notesContainer.innerHTML += `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Proje Adı</th>
+                                <th>Konu</th>
+                                <th>Açıklama</th>
+                                <th class="fixed-width">Sorumlu</th>
+                                <th class="fixed-width">Tarih</th>
+                                <th class="fixed-width">Değişiklik</th>
+                                <th class="action-width">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${groupNotes.map(note => `
+                                <tr class="${note.completed ? 'completed-note' : ''}">
+                                    <td onclick="copyToInputFields(${JSON.stringify(note)})">${note.projectName}</td>
+                                    <td>${note.topic}</td>
+                                    <td>
+                                                                              <div contenteditable="${!note.completed}" class="editable ${note.completed ? 'completed-note' : ''}" onblur="saveDescription(${note.id}, this)">${note.description}</div>
+                                    </td>
+                                    <td>${note.responsible}</td>
+                                    <td>${note.date}</td>
+                                    <td>${note.changeDate || '-'}</td>
+                                    <td class="action-buttons" style="border: none;">
+                                        ${note.completed ? `<button onclick="revertNote(${note.id})">Geri Al</button>` :
+                                        `<button onclick="editNote(${note.id})">Düzenle</button>
+                                         <button onclick="deleteNote(${note.id})">Sil</button>
+                                         <button onclick="completeNote(${note.id})">Tamamla</button>`}
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            }
+        }
+
+        async function saveDescription(id, element) {
+            try {
+                const response = await postData('updateNote', {
+                    id: id,
+                    description: element.innerText,
+                    changeDate: new Date().toISOString()
+                });
+                
+                if(response.success) {
+                    showTooltip("Açıklama güncellendi!");
+                    await renderNotes();
+                }
+            } catch (error) {
+                console.error('Güncelleme hatası:', error);
+            }
+        }
+
+        function revertNote(id) {
+            const note = notes.find(note => note.id === id);
+            if (note) {
+                note.completed = false;
+                saveNotes(); // Bu fonksiyonu tanımlamanız gerekebilir
+                renderNotes();
+                showTooltip("Not tamamlanmadı olarak işaretlendi!");
+            }
+        }
+
+        async function exportNotes() {
+            const notesToExport = JSON.parse(localStorage.getItem('notes')) || [];
+            const blob = new Blob([JSON.stringify(notesToExport, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'notlar.json'; // Dosya adı
+            document.body.appendChild(a); // Bağlantıyı DOM'a ekle
+            a.click();
+            document.body.removeChild(a); // Bağlantıyı DOM'dan kaldır
+            URL.revokeObjectURL(url);
+            showTooltip("Notlar başarıyla dışarı aktarıldı (yedeklendi)!");
+        }
+
+        async function importNotes(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            try {
+                const importedNotes = JSON.parse(e.target.result);
+                // Her not için API'ye ekleme
+                for (const note of importedNotes) {
+                    await postData('addNote', note);
+                }
+                await renderNotes();
+            } catch (error) {
+                console.error("Import error:", error);
+            }
+        };
+        reader.readAsText(file);
+    }
+}
+
+
+        // Sayfa yüklendiğinde notları çiz
+        window.onload = renderNotes;
+    </script>
+</body>
+</html>
+
